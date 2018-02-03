@@ -1,4 +1,4 @@
-package com.forecast.android.forecasty.annotations
+package com.android.forecasty.annotations
 
 import android.arch.lifecycle.ViewModel
 import dagger.MapKey

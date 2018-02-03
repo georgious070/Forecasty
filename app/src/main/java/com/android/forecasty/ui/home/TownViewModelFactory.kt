@@ -1,4 +1,4 @@
-package com.forecast.android.forecasty.ui.home
+package com.android.forecasty.ui.home
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider

@@ -1,4 +1,4 @@
-package com.forecast.android.forecasty
+package com.android.forecasty
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getTargetContext()
-        assertEquals("com.forecast.android.forecasty", appContext.packageName)
+        assertEquals("com.android.forecasty", appContext.packageName)
     }
 }

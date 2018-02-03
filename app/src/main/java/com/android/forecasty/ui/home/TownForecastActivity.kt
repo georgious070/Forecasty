@@ -1,14 +1,13 @@
-package com.forecast.android.forecasty.ui.home
+package com.android.forecasty.ui.home
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import com.forecast.android.forecasty.App
-import com.forecast.android.forecasty.R
+import com.android.forecasty.App
+import com.android.forecasty.R
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.*
 import javax.inject.Inject
 
 class TownForecastActivity : AppCompatActivity() {

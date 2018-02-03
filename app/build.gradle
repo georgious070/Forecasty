@@ -7,7 +7,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.forecast.android.forecasty"
+        applicationId "com.android.forecasty"
         minSdkVersion 19
         targetSdkVersion 26
         versionCode 1
@@ -46,11 +46,16 @@ dependencies {
     //RxJava
     compile 'io.reactivex.rxjava2:rxjava:2.1.1'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    compile 'io.reactivex.rxjava2:rxkotlin:2.0.0'
 
     //Retrofit
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+
+    //OkHttp
+    compile 'com.squareup.okhttp3:okhttp:3.8.0'
+    compile 'com.squareup.okio:okio:1.13.0'
 
     //Gson
     compile 'com.google.code.gson:gson:2.8.0'
@@ -63,7 +68,9 @@ dependencies {
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 }
-
+repositories {
+    mavenCentral()
+}
 kapt {
     generateStubs = true
 }

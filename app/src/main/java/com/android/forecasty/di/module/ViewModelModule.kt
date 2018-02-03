@@ -1,10 +1,10 @@
-package com.forecast.android.forecasty.di.module
+package com.android.forecasty.di.module
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
-import com.forecast.android.forecasty.annotations.ViewModelKey
-import com.forecast.android.forecasty.ui.home.TownViewModel
-import com.forecast.android.forecasty.ui.home.TownViewModelFactory
+import com.android.forecasty.annotations.ViewModelKey
+import com.android.forecasty.ui.home.TownViewModel
+import com.android.forecasty.ui.home.TownViewModelFactory
 
 import dagger.Binds
 import dagger.Module

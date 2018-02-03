@@ -1,4 +1,4 @@
-package com.forecast.android.forecasty
+package com.android.forecasty
 
 import org.junit.Test
 
