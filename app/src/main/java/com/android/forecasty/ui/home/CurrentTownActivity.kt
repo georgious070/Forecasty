@@ -14,11 +14,11 @@ import com.android.forecasty.R
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
-class TownForecastActivity : AppCompatActivity() {
+class CurrentTownActivity : AppCompatActivity() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    private lateinit var townViewModel: TownViewModel
+    private lateinit var townViewModel: CurrentTownViewModel
     val MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +27,7 @@ class TownForecastActivity : AppCompatActivity() {
 
         App.app.appComponent.inject(this)
 
-        townViewModel = ViewModelProviders.of(this, viewModelFactory).get(TownViewModel::class.java)
+        townViewModel = ViewModelProviders.of(this, viewModelFactory).get(CurrentTownViewModel::class.java)
         townViewModel.getData().observe(this, Observer { response ->
             text_temp.text = response!!.temp
             text_city_name.text = response.cityName

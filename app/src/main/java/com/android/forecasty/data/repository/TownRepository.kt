@@ -3,7 +3,7 @@ package com.android.forecasty.data.repository
 import android.annotation.SuppressLint
 import com.android.forecasty.App
 import com.android.forecasty.Constants
-import com.android.forecasty.data.api.WeatherApi
+import com.android.forecasty.data.api.WeatherCurrentLocationApi
 import com.google.android.gms.location.LocationRequest
 import com.patloew.rxlocation.RxLocation
 import io.reactivex.BackpressureStrategy
@@ -13,7 +13,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class TownRepository @Inject constructor(val weatherApi: WeatherApi,
+class TownRepository @Inject constructor(val weatherCurrentLocationApi: WeatherCurrentLocationApi,
                                          val locationRequest: LocationRequest) {
 
     @SuppressLint("MissingPermission")
@@ -22,7 +22,7 @@ class TownRepository @Inject constructor(val weatherApi: WeatherApi,
         return rxLocation.location().updates(locationRequest)
                 .toFlowable(BackpressureStrategy.BUFFER)
                 .flatMap { location ->
-                    weatherApi.getWeatherByLocation(
+                    weatherCurrentLocationApi.getWeatherByLocation(
                             location.latitude.toInt(),
                             location.longitude.toInt(),
                             Constants.APPID_KEY)

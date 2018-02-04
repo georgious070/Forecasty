@@ -1,4 +1,4 @@
-package com.android.forecasty.ui.home
+package com.android.forecasty.ui
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
@@ -7,7 +7,7 @@ import javax.inject.Provider
 import javax.inject.Singleton
 
 @Singleton
-class TownViewModelFactory @Inject constructor(private val creators: Map<Class<out ViewModel>,
+class ForecastViewModelFactory @Inject constructor(private val creators: Map<Class<out ViewModel>,
         @JvmSuppressWildcards Provider<ViewModel>>) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")

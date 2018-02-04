@@ -3,7 +3,7 @@ package com.android.forecasty.ui.home
 import android.Manifest
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
-import com.android.forecasty.domain.TownInteractor
+import com.android.forecasty.domain.CurrentTownInteractor
 import javax.inject.Inject
 import android.arch.lifecycle.MutableLiveData
 import android.content.pm.PackageManager
@@ -13,7 +13,8 @@ import com.android.forecasty.data.repository.WeatherDescription
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 
-class TownViewModel @Inject constructor(val townInteractor: TownInteractor) : ViewModel() {
+class CurrentTownViewModel @Inject constructor(
+        val currentTownInteractor: CurrentTownInteractor) : ViewModel() {
 
     private var name: MutableLiveData<WeatherDescription>? = null
     private lateinit var disposable: Disposable
@@ -29,7 +30,7 @@ class TownViewModel @Inject constructor(val townInteractor: TownInteractor) : Vi
     fun loadTemperature() {
         if (ContextCompat.checkSelfPermission(App.app, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
-            disposable = townInteractor.getName()
+            disposable = currentTownInteractor.getName()
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ response ->
                         name!!.value = response
