@@ -2,7 +2,9 @@ package com.android.forecasty.di.module
 
 import android.content.Context
 import com.android.forecasty.Constants
-import com.android.forecasty.data.api.WeatherApi
+import com.android.forecasty.data.api.WeatherCitiesInCycleApi
+import com.android.forecasty.data.api.WeatherCurrentLocationApi
+import com.google.android.gms.location.LocationRequest
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -28,6 +30,17 @@ class AppModule constructor(val app: Context) {
 
     @Provides
     @Singleton
-    fun provideApi(retrofit: Retrofit): WeatherApi =
-            retrofit.create(WeatherApi::class.java)
+    fun provideLocationApi(retrofit: Retrofit): WeatherCurrentLocationApi =
+            retrofit.create(WeatherCurrentLocationApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideCitiesInCycleApi(retrofit: Retrofit): WeatherCitiesInCycleApi =
+            retrofit.create(WeatherCitiesInCycleApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideLocationRequest(): LocationRequest = LocationRequest.create()
+            .setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY)
+            .setInterval(1_800_000)
 }

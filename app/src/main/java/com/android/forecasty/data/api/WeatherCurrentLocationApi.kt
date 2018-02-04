@@ -6,7 +6,7 @@ import io.reactivex.Flowable
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface WeatherApi {
+interface WeatherCurrentLocationApi {
 
     @GET("data/2.5/weather")
     fun getWeatherByLocation(
