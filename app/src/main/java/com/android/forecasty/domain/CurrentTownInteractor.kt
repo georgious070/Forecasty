@@ -1,7 +1,7 @@
 package com.android.forecasty.domain
 
-import com.android.forecasty.data.repository.TownRepository
-import com.android.forecasty.data.repository.WeatherDescription
+import com.android.forecasty.data.repository.town.TownRepository
+import com.android.forecasty.data.repository.town.WeatherDescription
 import io.reactivex.Flowable
 import javax.inject.Inject
 

@@ -1,7 +1,6 @@
 package com.android.forecasty.data.api
 
-import com.android.forecasty.data.model.Main
-import com.android.forecasty.data.model.Response
+import com.android.forecasty.data.model.location.CurrentLocation
 import io.reactivex.Flowable
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -12,5 +11,5 @@ interface WeatherCurrentLocationApi {
     fun getWeatherByLocation(
             @Query("lat") lat: Int,
             @Query("lon") lon: Int,
-            @Query("APPID") appidKey: String): Flowable<Response>
+            @Query("APPID") appidKey: String): Flowable<CurrentLocation>
 }

@@ -71,6 +71,9 @@ dependencies {
     kapt 'com.google.dagger:dagger-compiler:2.12'
     compile 'com.google.dagger:dagger:2.12'
 
+    //Cicerone
+    compile 'ru.terrakok.cicerone:cicerone:1.0'
+
     //LeakCanary
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
@@ -78,6 +81,9 @@ dependencies {
 
 repositories {
     mavenCentral()
+    maven{
+        url 'https://dl.bintray.com/terrakok/terramaven/'
+    }
 }
 kapt {
     generateStubs = true

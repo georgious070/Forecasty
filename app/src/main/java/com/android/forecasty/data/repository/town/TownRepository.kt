@@ -1,4 +1,4 @@
-package com.android.forecasty.data.repository
+package com.android.forecasty.data.repository.town
 
 import android.annotation.SuppressLint
 import com.android.forecasty.App
@@ -27,7 +27,10 @@ class TownRepository @Inject constructor(val weatherCurrentLocationApi: WeatherC
                             location.longitude.toInt(),
                             Constants.APPID_KEY)
                             .map { response ->
-                                WeatherDescription(response.main.temp.toString(), response.name)
+                                WeatherDescription(response.main.temp.toString(),
+                                        response.name,
+                                        response.coord.lat,
+                                        response.coord.lon)
                             }
                             .subscribeOn(Schedulers.io())
                 }

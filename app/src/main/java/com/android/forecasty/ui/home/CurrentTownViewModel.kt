@@ -9,22 +9,22 @@ import android.arch.lifecycle.MutableLiveData
 import android.content.pm.PackageManager
 import android.support.v4.content.ContextCompat
 import com.android.forecasty.App
-import com.android.forecasty.data.repository.WeatherDescription
+import com.android.forecasty.data.repository.town.WeatherDescription
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 
 class CurrentTownViewModel @Inject constructor(
         val currentTownInteractor: CurrentTownInteractor) : ViewModel() {
 
-    private var name: MutableLiveData<WeatherDescription>? = null
+    private var currentWeather: MutableLiveData<WeatherDescription>? = null
     private lateinit var disposable: Disposable
 
     fun getData(): LiveData<WeatherDescription> {
-        if (name == null) {
-            name = MutableLiveData()
+        if (currentWeather == null) {
+            currentWeather = MutableLiveData()
             loadTemperature()
         }
-        return name as MutableLiveData<WeatherDescription>
+        return currentWeather as MutableLiveData<WeatherDescription>
     }
 
     fun loadTemperature() {
@@ -33,7 +33,7 @@ class CurrentTownViewModel @Inject constructor(
             disposable = currentTownInteractor.getName()
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ response ->
-                        name!!.value = response
+                        currentWeather!!.value = response
                     })
         }
     }
