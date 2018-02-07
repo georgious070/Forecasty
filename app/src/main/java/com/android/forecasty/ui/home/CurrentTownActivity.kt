@@ -40,7 +40,7 @@ class CurrentTownActivity : AppCompatActivity() {
             longitude = response.longitude
         })
 
-        button_next.setOnClickListener { v ->
+        button_next.setOnClickListener { _ ->
             startActivity(CitiesCycleActivity.getIntent(this@CurrentTownActivity, latitude, longitude))
         }
     }
