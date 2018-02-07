@@ -85,7 +85,7 @@ dependencies {
 
 repositories {
     mavenCentral()
-    maven{
+    maven {
         url 'https://dl.bintray.com/terrakok/terramaven/'
     }
 }

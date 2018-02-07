@@ -13,7 +13,6 @@ import javax.inject.Inject
 
 class CitiesCycleActivity : AppCompatActivity() {
 
-
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var citiesCycleViewModel: CitiesCycleViewModel

@@ -6,7 +6,6 @@ import com.android.forecasty.domain.CitiesCycleInteractor
 import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
-
 class CitiesCycleViewModel @Inject constructor(
        val citiesCycleInteractor: CitiesCycleInteractor) : ViewModel() {
 

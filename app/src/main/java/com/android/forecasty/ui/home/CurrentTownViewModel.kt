@@ -41,6 +41,5 @@ class CurrentTownViewModel @Inject constructor(
     override fun onCleared() {
         super.onCleared()
         disposable.dispose()
-
     }
 }

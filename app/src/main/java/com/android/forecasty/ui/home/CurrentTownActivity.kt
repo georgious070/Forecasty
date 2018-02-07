@@ -15,7 +15,6 @@ import com.android.forecasty.ui.cities.CitiesCycleActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
-
 class CurrentTownActivity : AppCompatActivity() {
 
     @Inject
@@ -39,7 +38,6 @@ class CurrentTownActivity : AppCompatActivity() {
             latitude = response.latitude
             longitude = response.longitude
         })
-
         button_next.setOnClickListener { _ ->
             startActivity(CitiesCycleActivity.getIntent(this@CurrentTownActivity, latitude, longitude))
         }

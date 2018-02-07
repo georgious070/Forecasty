@@ -44,9 +44,10 @@ class AppModule constructor(val app: Context) {
 
     @Provides
     @Singleton
-    fun provideLocationRequest(): LocationRequest = LocationRequest.create()
-            .setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY)
-            .setInterval(1_800_000)
+    fun provideLocationRequest(): LocationRequest =
+            LocationRequest.create()
+                    .setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY)
+                    .setInterval(1_800_000)
 
     @Provides
     @Singleton
@@ -55,5 +56,6 @@ class AppModule constructor(val app: Context) {
 
     @Provides
     @Singleton
-    fun provideHistoryDao(appDatabase: AppDatabase): HistoryDao = appDatabase.historyDao()
+    fun provideHistoryDao(appDatabase: AppDatabase): HistoryDao =
+            appDatabase.historyDao()
 }
