@@ -21,8 +21,8 @@ class CitiesCycleActivity : AppCompatActivity() {
     companion object {
         fun getIntent(context: Context, latitude: Int, longitute: Int): Intent {
             val intent = Intent(context, CitiesCycleActivity::class.java)
-            intent.putExtra(Constants.LATITUDE, latitude)
-            intent.putExtra(Constants.LONGITUDE, longitute)
+            intent.putExtra(Constants.INTENT_KEY_LATITUDE, latitude)
+            intent.putExtra(Constants.INTENT_KEY_LONGITUDE, longitute)
             return intent
         }
     }

@@ -6,4 +6,10 @@
     android:layout_height="match_parent"
     tools:context="com.android.forecasty.ui.cities.CitiesCycleActivity">
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManage" />
+
 </android.support.constraint.ConstraintLayout>
