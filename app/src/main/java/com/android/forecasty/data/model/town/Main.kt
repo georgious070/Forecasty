@@ -1,4 +1,4 @@
-package com.android.forecasty.data.model.location
+package com.android.forecasty.data.model.town
 
 import com.google.gson.annotations.SerializedName
 

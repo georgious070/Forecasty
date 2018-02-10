@@ -5,7 +5,7 @@ import io.reactivex.Flowable
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface WeatherCitiesInCycleApi {
+interface CitiesCycleApi {
 
     @GET("data/2.5/find")
     fun getWeatherInCycle(

@@ -1,11 +1,11 @@
 package com.android.forecasty.data.model.cycle
 
-import com.android.forecasty.data.model.location.WeatherItem
-import com.android.forecasty.data.model.location.Coord
-import com.android.forecasty.data.model.location.Main
-import com.android.forecasty.data.model.location.Clouds
-import com.android.forecasty.data.model.location.Sys
-import com.android.forecasty.data.model.location.Wind
+import com.android.forecasty.data.model.town.WeatherItem
+import com.android.forecasty.data.model.town.Coord
+import com.android.forecasty.data.model.town.Main
+import com.android.forecasty.data.model.town.Clouds
+import com.android.forecasty.data.model.town.Sys
+import com.android.forecasty.data.model.town.Wind
 import com.google.gson.annotations.SerializedName
 
 data class ListItem(@SerializedName("dt") val dt: Int,

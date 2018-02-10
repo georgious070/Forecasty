@@ -1,5 +1,6 @@
 package com.android.forecasty.ui.cities
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
@@ -32,6 +33,11 @@ class CitiesCycleActivity : AppCompatActivity() {
 
         App.app.appComponent.inject(this)
 
-        citiesCycleViewModel = ViewModelProviders.of(this, viewModelFactory).get(CitiesCycleViewModel::class.java)
+        citiesCycleViewModel = ViewModelProviders.of(
+                this, viewModelFactory).get(CitiesCycleViewModel::class.java)
+        citiesCycleViewModel.getData(
+                intent.getIntExtra(Constants.INTENT_KEY_LATITUDE, 0),
+                intent.getIntExtra(Constants.INTENT_KEY_LONGITUDE, 0))
+                .observe(this, Observer {  })
     }
 }
