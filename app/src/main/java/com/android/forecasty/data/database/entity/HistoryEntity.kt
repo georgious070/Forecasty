@@ -8,11 +8,11 @@ import com.android.forecasty.Constants
 @Entity(tableName = Constants.HISTORY_TABLE_NAME)
 data class HistoryEntity constructor(
         @ColumnInfo(name = Constants.COLUMN_CITY_NAME_HISTORY)
-        var cityName: String,
+        var cityName: String = "",
         @ColumnInfo(name = Constants.COLUMN_DATE_HISTORY)
-        var date: String,
+        var date: String = "",
         @ColumnInfo(name = Constants.COLUMN_TEMPERATURE_HISTORY)
-        var temp: Double) {
+        var temp: Double = 0.0) {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = Constants.COLUMN_ID_HISTORY)

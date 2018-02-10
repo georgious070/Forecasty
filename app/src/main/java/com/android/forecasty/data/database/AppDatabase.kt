@@ -7,7 +7,8 @@ import com.android.forecasty.data.database.dao.HistoryDao
 import com.android.forecasty.data.database.entity.HistoryEntity
 
 @Database(entities = arrayOf(HistoryEntity::class),
-        version = Constants.DATABASE_VERSION)
+        version = Constants.DATABASE_VERSION,
+        exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun historyDao(): HistoryDao
