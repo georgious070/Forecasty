@@ -29,8 +29,8 @@ class CurrentTownRepository @Inject constructor(val currentTownApi: CurrentTownA
                             .map { response ->
                                 WeatherDescription(response.main.temp.toString(),
                                         response.name,
-                                        response.coord.lat,
-                                        response.coord.lon)
+                                        response.coord.lat.toInt(),
+                                        response.coord.lon.toInt())
                             }
                             .subscribeOn(Schedulers.io())
                 }

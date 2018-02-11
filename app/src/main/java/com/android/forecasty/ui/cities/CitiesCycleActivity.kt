@@ -10,6 +10,8 @@ import android.os.Bundle
 import com.android.forecasty.App
 import com.android.forecasty.Constants
 import com.android.forecasty.R
+import com.android.forecasty.utils.CityAdapter
+import kotlinx.android.synthetic.main.activity_cities.*
 import javax.inject.Inject
 
 class CitiesCycleActivity : AppCompatActivity() {
@@ -33,11 +35,16 @@ class CitiesCycleActivity : AppCompatActivity() {
 
         App.app.appComponent.inject(this)
 
+        var adapter = CityAdapter(ArrayList())
+        recycler_view.adapter = adapter
+
         citiesCycleViewModel = ViewModelProviders.of(
                 this, viewModelFactory).get(CitiesCycleViewModel::class.java)
         citiesCycleViewModel.getData(
                 intent.getIntExtra(Constants.INTENT_KEY_LATITUDE, 0),
                 intent.getIntExtra(Constants.INTENT_KEY_LONGITUDE, 0))
-                .observe(this, Observer {  })
+                .observe(this, Observer { response ->
+                    adapter.updateList(response!!)
+                })
     }
 }
