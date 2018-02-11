@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProvider
 import com.android.forecasty.annotations.ViewModelKey
 import com.android.forecasty.ui.home.CurrentTownViewModel
 import com.android.forecasty.ui.ForecastViewModelFactory
+import com.android.forecasty.ui.cities.CitiesCycleViewModel
 
 import dagger.Binds
 import dagger.Module
@@ -16,7 +17,12 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(CurrentTownViewModel::class)
-    abstract fun bindTownViewModel(townViewModel: CurrentTownViewModel): ViewModel
+    abstract fun bindCurrentTownViewModel(townViewModel: CurrentTownViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CitiesCycleViewModel::class)
+    abstract fun bindCitiesCycleViewModel(citiesCycleViewModel: CitiesCycleViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(viewModelFactory: ForecastViewModelFactory): ViewModelProvider.Factory

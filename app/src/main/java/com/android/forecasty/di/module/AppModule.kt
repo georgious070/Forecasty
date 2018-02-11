@@ -1,9 +1,13 @@
 package com.android.forecasty.di.module
 
+import android.arch.persistence.room.Room
 import android.content.Context
+import com.android.forecasty.App
 import com.android.forecasty.Constants
-import com.android.forecasty.data.api.WeatherCitiesInCycleApi
-import com.android.forecasty.data.api.WeatherCurrentLocationApi
+import com.android.forecasty.data.api.CitiesCycleApi
+import com.android.forecasty.data.api.CurrentTownApi
+import com.android.forecasty.data.database.AppDatabase
+import com.android.forecasty.data.database.dao.HistoryDao
 import com.google.android.gms.location.LocationRequest
 import dagger.Module
 import dagger.Provides
@@ -30,17 +34,28 @@ class AppModule constructor(val app: Context) {
 
     @Provides
     @Singleton
-    fun provideLocationApi(retrofit: Retrofit): WeatherCurrentLocationApi =
-            retrofit.create(WeatherCurrentLocationApi::class.java)
+    fun provideLocationApi(retrofit: Retrofit): CurrentTownApi =
+            retrofit.create(CurrentTownApi::class.java)
 
     @Provides
     @Singleton
-    fun provideCitiesInCycleApi(retrofit: Retrofit): WeatherCitiesInCycleApi =
-            retrofit.create(WeatherCitiesInCycleApi::class.java)
+    fun provideCitiesInCycleApi(retrofit: Retrofit): CitiesCycleApi =
+            retrofit.create(CitiesCycleApi::class.java)
 
     @Provides
     @Singleton
-    fun provideLocationRequest(): LocationRequest = LocationRequest.create()
-            .setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY)
-            .setInterval(1_800_000)
+    fun provideLocationRequest(): LocationRequest =
+            LocationRequest.create()
+                    .setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY)
+                    .setInterval(1_800_000)
+
+    @Provides
+    @Singleton
+    fun provideAppDatabase(app: App): AppDatabase =
+            Room.databaseBuilder(app, AppDatabase::class.java, Constants.DATABASE_NAME).build()
+
+    @Provides
+    @Singleton
+    fun provideHistoryDao(appDatabase: AppDatabase): HistoryDao =
+            appDatabase.historyDao()
 }
