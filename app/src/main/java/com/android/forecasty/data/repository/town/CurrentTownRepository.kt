@@ -1,7 +1,6 @@
 package com.android.forecasty.data.repository.town
 
 import android.annotation.SuppressLint
-import com.android.forecasty.App
 import com.android.forecasty.Const
 import com.android.forecasty.data.api.CurrentTownApi
 import com.google.android.gms.location.LocationRequest
@@ -14,11 +13,11 @@ import javax.inject.Singleton
 
 @Singleton
 class CurrentTownRepository @Inject constructor(val currentTownApi: CurrentTownApi,
-                                                val locationRequest: LocationRequest) {
+                                                val locationRequest: LocationRequest,
+                                                val rxLocation: RxLocation) {
 
     @SuppressLint("MissingPermission")
     fun getWeatherByCoord(): Flowable<WeatherDescription> {
-        var rxLocation = RxLocation(App.app)
         return rxLocation.location().updates(locationRequest)
                 .toFlowable(BackpressureStrategy.BUFFER)
                 .flatMap { location ->
