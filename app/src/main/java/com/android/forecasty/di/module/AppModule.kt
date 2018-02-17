@@ -3,12 +3,13 @@ package com.android.forecasty.di.module
 import android.arch.persistence.room.Room
 import android.content.Context
 import com.android.forecasty.App
-import com.android.forecasty.Constants
+import com.android.forecasty.Const
 import com.android.forecasty.data.api.CitiesCycleApi
 import com.android.forecasty.data.api.CurrentTownApi
 import com.android.forecasty.data.database.AppDatabase
 import com.android.forecasty.data.database.dao.HistoryDao
 import com.google.android.gms.location.LocationRequest
+import com.patloew.rxlocation.RxLocation
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -27,7 +28,7 @@ class AppModule constructor(val app: Context) {
     @Singleton
     fun provideRetrofit(): Retrofit =
             Retrofit.Builder()
-                    .baseUrl(Constants.BASE_URL)
+                    .baseUrl(Const.Api.BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build()
@@ -52,7 +53,7 @@ class AppModule constructor(val app: Context) {
     @Provides
     @Singleton
     fun provideAppDatabase(app: App): AppDatabase =
-            Room.databaseBuilder(app, AppDatabase::class.java, Constants.DATABASE_NAME).build()
+            Room.databaseBuilder(app, AppDatabase::class.java, Const.DB.DATABASE_NAME).build()
 
     @Provides
     @Singleton

@@ -8,7 +8,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.android.forecasty.App
-import com.android.forecasty.Constants
+import com.android.forecasty.Const
 import com.android.forecasty.R
 import com.android.forecasty.utils.CityAdapter
 import kotlinx.android.synthetic.main.activity_cities.*
@@ -23,8 +23,8 @@ class CitiesCycleActivity : AppCompatActivity() {
     companion object {
         fun getIntent(context: Context, latitude: Int, longitute: Int): Intent {
             val intent = Intent(context, CitiesCycleActivity::class.java)
-            intent.putExtra(Constants.INTENT_KEY_LATITUDE, latitude)
-            intent.putExtra(Constants.INTENT_KEY_LONGITUDE, longitute)
+            intent.putExtra(Const.IntentKeys.INTENT_KEY_LATITUDE, latitude)
+            intent.putExtra(Const.IntentKeys.INTENT_KEY_LONGITUDE, longitute)
             return intent
         }
     }
@@ -35,14 +35,15 @@ class CitiesCycleActivity : AppCompatActivity() {
 
         App.app.appComponent.inject(this)
 
-        var adapter = CityAdapter(ArrayList())
+        val adapter = CityAdapter(ArrayList())
         recycler_view.adapter = adapter
 
-        citiesCycleViewModel = ViewModelProviders.of(
-                this, viewModelFactory).get(CitiesCycleViewModel::class.java)
+        citiesCycleViewModel = ViewModelProviders.of(this, viewModelFactory)
+                .get(CitiesCycleViewModel::class.java)
+
         citiesCycleViewModel.getData(
-                intent.getIntExtra(Constants.INTENT_KEY_LATITUDE, 0),
-                intent.getIntExtra(Constants.INTENT_KEY_LONGITUDE, 0))
+                intent.getIntExtra(Const.IntentKeys.INTENT_KEY_LATITUDE, 0),
+                intent.getIntExtra(Const.IntentKeys.INTENT_KEY_LONGITUDE, 0))
                 .observe(this, Observer { response ->
                     adapter.updateList(response!!)
                 })
