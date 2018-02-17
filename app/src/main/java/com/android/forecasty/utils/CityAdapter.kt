@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import com.android.forecasty.data.model.cycle.ListItem
 
-class CityAdapter constructor(val itemsList: MutableList<ListItem>): RecyclerView.Adapter<CityViewHolder>() {
+class CityAdapter constructor(val itemsList: MutableList<ListItem>) : RecyclerView.Adapter<CityViewHolder>() {
 
     fun updateList(itemsList: MutableList<ListItem>) {
         val diffResult = DiffUtil.calculateDiff(DiffUtilCallback(this.itemsList, itemsList))
