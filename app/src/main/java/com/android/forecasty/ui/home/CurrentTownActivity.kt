@@ -44,10 +44,6 @@ class CurrentTownActivity : AppCompatActivity() {
                     if (granted) {
                         observeLiveData()
                         setButtonNextListener()
-                    } else {
-//                        val appSettingsIntent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-//                                "pacckage:$packageName".toUri())
-//                        startActivityForResult(appSettingsIntent, Const.ACCESS_LOCATION)
                     }
                 }
     }
