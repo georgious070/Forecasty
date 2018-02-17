@@ -4,7 +4,7 @@ import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import com.android.forecasty.annotations.ViewModelKey
 import com.android.forecasty.ui.home.CurrentTownViewModel
-import com.android.forecasty.ui.ForecastViewModelFactory
+import com.android.forecasty.utils.factory.ForecastViewModelFactory
 import com.android.forecasty.ui.cities.CitiesCycleViewModel
 
 import dagger.Binds

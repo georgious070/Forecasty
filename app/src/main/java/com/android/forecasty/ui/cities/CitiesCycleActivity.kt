@@ -10,7 +10,7 @@ import android.os.Bundle
 import com.android.forecasty.App
 import com.android.forecasty.Const
 import com.android.forecasty.R
-import com.android.forecasty.utils.CityAdapter
+import com.android.forecasty.utils.recycler.CityAdapter
 import kotlinx.android.synthetic.main.activity_cities.*
 import javax.inject.Inject
 

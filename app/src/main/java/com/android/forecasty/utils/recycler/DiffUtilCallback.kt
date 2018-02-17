@@ -1,4 +1,4 @@
-package com.android.forecasty.utils
+package com.android.forecasty.utils.recycler
 
 import android.support.v7.util.DiffUtil
 import com.android.forecasty.data.model.cycle.ListItem

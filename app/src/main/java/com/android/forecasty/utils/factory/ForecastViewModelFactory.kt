@@ -1,4 +1,4 @@
-package com.android.forecasty.ui
+package com.android.forecasty.utils.factory
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider

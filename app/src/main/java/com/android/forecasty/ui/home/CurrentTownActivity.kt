@@ -50,7 +50,6 @@ class CurrentTownActivity : AppCompatActivity() {
                     if (granted) {
                         if (checkGps()) {
                             observeLiveData()
-                            setButtonNextListener()
                         } else {
                             enableGps()
                         }
@@ -63,17 +62,18 @@ class CurrentTownActivity : AppCompatActivity() {
     fun observeLiveData() {
         townViewModel.getData()
                 .observe(this, Observer { response ->
-                    text_temp.text = response!!.temp
-                    collapsing_toolbar.title = response.cityName
-                    latitude = response.latitude
-                    longitude = response.longitude
+                    text_temp.text = response!!.get(0).temp
+                    collapsing_toolbar.title = response.get(0).cityName
+                    latitude = response.get(0).latitude
+                    longitude = response.get(0).longitude
                 })
+        setButtonNextListener()
     }
 
     fun setButtonNextListener() {
         button_next.setOnClickListener { _ ->
             startActivity(CitiesCycleActivity.getIntent(
-                    this@CurrentTownActivity, latitude, longitude))
+                    this, latitude, longitude))
         }
     }
 
