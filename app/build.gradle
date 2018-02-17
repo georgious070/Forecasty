@@ -5,65 +5,98 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 27
     defaultConfig {
-        applicationId "com.forecast.android.forecasty"
+        applicationId "com.android.forecasty"
         minSdkVersion 19
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation 'com.android.support:appcompat-v7:27.0.2'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.android.support:support-v4:27.0.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
-    //ViewModel and LiveData
+    // Support
+    compile 'com.android.support:recyclerview-v7:27.0.2'
+    compile 'com.android.support:design:27.0.2'
+
+    // Android-KTX
+    implementation 'androidx.core:core-ktx:0.1'
+
+    // ViewModel and LiveData
     implementation "android.arch.lifecycle:extensions:1.1.0"
-    kapt "android.arch.lifecycle:compiler:1.1.0"
+    implementation "android.arch.lifecycle:common-java8:1.1.0"
 
-    //Room(Rx)
-    implementation "android.arch.persistence.room:runtime:1.1.0-alpha1"
-    kapt "android.arch.persistence.room:compiler:1.1.0-alpha1"
-    implementation "android.arch.persistence.room:rxjava2:1.1.0-alpha1"
+    // Room(Rx)
+    implementation "android.arch.persistence.room:runtime:1.1.0-alpha2"
+    kapt "android.arch.persistence.room:compiler:1.1.0-alpha2"
+    implementation "android.arch.persistence.room:rxjava2:1.1.0-alpha2"
 
-    //Paging
-    implementation "android.arch.paging:runtime:1.0.0-alpha5"
-
-    //RxJava
-    compile 'io.reactivex.rxjava2:rxjava:2.1.1'
+    // RxJava2
+    compile 'io.reactivex.rxjava2:rxjava:2.1.6'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    compile 'io.reactivex.rxjava2:rxkotlin:2.0.0'
 
-    //Retrofit
+    // RxLocation
+    compile 'com.patloew.rxlocation:rxlocation:1.0.4'
+
+    // RxPermission
+    compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
+
+    // Retrofit
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
 
-    //Gson
+    // OkHttp
+    compile 'com.squareup.okhttp3:okhttp:3.8.0'
+    compile 'com.squareup.okio:okio:1.13.0'
+
+    // Gson
     compile 'com.google.code.gson:gson:2.8.0'
 
-    //Dagger2
+    // Dagger2
     kapt 'com.google.dagger:dagger-compiler:2.12'
     compile 'com.google.dagger:dagger:2.12'
 
-    //LeakCanary
+    // Glide
+    implementation 'com.github.bumptech.glide:glide:4.6.1'
+    kapt 'com.github.bumptech.glide:compiler:4.6.1'
+
+    // Cicerone
+    compile 'ru.terrakok.cicerone:cicerone:1.0'
+
+    // LeakCanary
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 }
 
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://dl.bintray.com/terrakok/terramaven/'
+    }
+}
 kapt {
     generateStubs = true
 }
