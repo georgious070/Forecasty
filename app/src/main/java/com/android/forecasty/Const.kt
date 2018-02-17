@@ -2,7 +2,7 @@ package com.android.forecasty
 
 object Const {
 
-    object Location{
+    object Location {
         const val ACCESS_LOCATION_CODE = 10
     }
 

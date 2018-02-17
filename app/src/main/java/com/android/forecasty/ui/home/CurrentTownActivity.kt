@@ -41,12 +41,10 @@ class CurrentTownActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         townViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(CurrentTownViewModel::class.java)
 
         rxPermissions = RxPermissions(this)
-
         rxPermissions.request(Manifest.permission.ACCESS_FINE_LOCATION)
                 .subscribe { granted ->
                     if (granted) {
@@ -92,11 +90,13 @@ class CurrentTownActivity : AppCompatActivity() {
 
     fun enableGps() {
         rxLocation.settings().checkAndHandleResolution(locationRequest)
-                .subscribe{ isEnabled -> if(isEnabled){
-                    observeLiveData()
-                } else {
-                    Toast.makeText(this, "Sorry", Toast.LENGTH_SHORT).show()
-                }}
+                .subscribe { isEnabled ->
+                    if (isEnabled) {
+                        observeLiveData()
+                    } else {
+                        Toast.makeText(this, "Sorry", Toast.LENGTH_SHORT).show()
+                    }
+                }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
