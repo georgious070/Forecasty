@@ -1,6 +1,5 @@
 package com.android.forecasty.data.repository.town
 
-import android.annotation.SuppressLint
 import com.android.forecasty.Const
 import com.android.forecasty.data.api.CurrentTownApi
 import com.google.android.gms.location.LocationRequest
@@ -15,7 +14,6 @@ import javax.inject.Singleton
 class CurrentTownRepository @Inject constructor(val currentTownApi: CurrentTownApi,
                                                 val locationRequest: LocationRequest,
                                                 val rxLocation: RxLocation) {
-
 
     fun getWeatherByCoord(): Flowable<MutableList<DataEveryThirdHourWeather>> {
         var listOfWeekTownWeather: MutableList<DataEveryThirdHourWeather> = ArrayList()

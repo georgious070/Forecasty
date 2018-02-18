@@ -7,5 +7,6 @@ import javax.inject.Inject
 
 class CurrentTownInteractor @Inject constructor(val currentTownRepository: CurrentTownRepository) {
 
-    fun getName(): Flowable<MutableList<DataEveryThirdHourWeather>> = currentTownRepository.getWeatherByCoord()
+    fun getName(): Flowable<MutableList<DataEveryThirdHourWeather>> =
+            currentTownRepository.getWeatherByCoord()
 }

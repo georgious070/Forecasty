@@ -7,6 +7,6 @@ import javax.inject.Inject
 
 class CitiesCycleInteractor @Inject constructor(val citiesCycleRepository: CitiesCycleRepository){
 
-    fun getCities(lat:Int, long:Int): Flowable<MutableList<ListItem>>
-            = citiesCycleRepository.getCities(lat,long)
+    fun getCities(lat:Int, long:Int): Flowable<MutableList<ListItem>> =
+            citiesCycleRepository.getCities(lat,long)
 }

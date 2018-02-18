@@ -1,8 +1,6 @@
 package com.android.forecasty.di.module
 
 import android.arch.persistence.room.Room
-import android.content.Context
-import android.location.LocationManager
 import com.android.forecasty.App
 import com.android.forecasty.Const
 import com.android.forecasty.data.api.CitiesCycleApi
