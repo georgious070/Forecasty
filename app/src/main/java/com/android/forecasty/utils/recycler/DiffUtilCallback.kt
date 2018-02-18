@@ -1,13 +1,12 @@
 package com.android.forecasty.utils.recycler
 
 import android.support.v7.util.DiffUtil
-import com.android.forecasty.data.model.cycle.ListItem
 
-class DiffUtilCallback constructor(val oldList: MutableList<ListItem>, val newList: MutableList<ListItem>)
+class DiffUtilCallback<T> constructor(val oldList: MutableList<T>, val newList: MutableList<T>)
     : DiffUtil.Callback() {
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
-            oldList[oldItemPosition].id == newList[newItemPosition].id
+            oldList[oldItemPosition] === newList[newItemPosition]
 
     override fun getOldListSize(): Int = oldList.size
 

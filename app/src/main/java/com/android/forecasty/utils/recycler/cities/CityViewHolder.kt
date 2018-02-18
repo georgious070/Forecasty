@@ -1,14 +1,14 @@
-package com.android.forecasty.utils.recycler
+package com.android.forecasty.utils.recycler.cities
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.android.forecasty.R
 import com.android.forecasty.data.model.cycle.ListItem
-import kotlinx.android.synthetic.main.recycler_item.view.*
+import kotlinx.android.synthetic.main.recycler_city_item.view.*
 
 class CityViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.recycler_item, parent, false)) {
+        LayoutInflater.from(parent.context).inflate(R.layout.recycler_city_item, parent, false)) {
 
     fun bindTo(cityDescription: ListItem) {
         itemView.text_city_name_int_recycler.text = cityDescription.name
