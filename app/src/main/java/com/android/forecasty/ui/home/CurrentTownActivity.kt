@@ -13,13 +13,13 @@ import com.android.forecasty.R
 import com.android.forecasty.ui.cities.CitiesCycleActivity
 import com.tbruyelle.rxpermissions2.RxPermissions
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.nested_scroll_view_content_main.*
 import javax.inject.Inject
 import android.location.LocationManager
 import android.provider.Settings
 import android.widget.Toast
 import androidx.net.toUri
 import com.android.forecasty.Const
+import com.android.forecasty.utils.recycler.town.TownAdapter
 import com.google.android.gms.location.LocationRequest
 import com.patloew.rxlocation.RxLocation
 
@@ -30,16 +30,20 @@ class CurrentTownActivity : AppCompatActivity() {
     @Inject lateinit var rxLocation: RxLocation
 
     lateinit var townViewModel: CurrentTownViewModel
-    private lateinit var rxPermissions: RxPermissions
+    lateinit var rxPermissions: RxPermissions
+    lateinit var adapter: TownAdapter
     var latitude: Int = 0
     var longitude: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         App.app.appComponent.inject(this)
-
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        adapter = TownAdapter(ArrayList())
+        recycler_view_dates.isNestedScrollingEnabled = false
+        recycler_view_dates.adapter = adapter
 
         townViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(CurrentTownViewModel::class.java)
@@ -50,7 +54,6 @@ class CurrentTownActivity : AppCompatActivity() {
                     if (granted) {
                         if (checkGps()) {
                             observeLiveData()
-                            setButtonNextListener()
                         } else {
                             enableGps()
                         }
@@ -63,17 +66,18 @@ class CurrentTownActivity : AppCompatActivity() {
     fun observeLiveData() {
         townViewModel.getData()
                 .observe(this, Observer { response ->
-                    text_temp.text = response!!.temp
-                    collapsing_toolbar.title = response.cityName
-                    latitude = response.latitude
-                    longitude = response.longitude
+                    adapter.updateList(response!!)
+                    collapsing_toolbar.title = response.get(0).cityName
+                    latitude = response.get(0).latitude
+                    longitude = response.get(0).longitude
                 })
+        setButtonNextListener()
     }
 
     fun setButtonNextListener() {
         button_next.setOnClickListener { _ ->
             startActivity(CitiesCycleActivity.getIntent(
-                    this@CurrentTownActivity, latitude, longitude))
+                    this, latitude, longitude))
         }
     }
 

@@ -1,6 +1,5 @@
 package com.android.forecasty.data.repository.town
 
-import android.annotation.SuppressLint
 import com.android.forecasty.Const
 import com.android.forecasty.data.api.CurrentTownApi
 import com.google.android.gms.location.LocationRequest
@@ -16,8 +15,8 @@ class CurrentTownRepository @Inject constructor(val currentTownApi: CurrentTownA
                                                 val locationRequest: LocationRequest,
                                                 val rxLocation: RxLocation) {
 
-    @SuppressLint("MissingPermission")
-    fun getWeatherByCoord(): Flowable<WeatherDescription> {
+    fun getWeatherByCoord(): Flowable<MutableList<DataEveryThirdHourWeather>> {
+        var listOfWeekTownWeather: MutableList<DataEveryThirdHourWeather> = ArrayList()
         return rxLocation.location().updates(locationRequest)
                 .toFlowable(BackpressureStrategy.BUFFER)
                 .flatMap { location ->
@@ -26,10 +25,17 @@ class CurrentTownRepository @Inject constructor(val currentTownApi: CurrentTownA
                             location.longitude.toInt(),
                             Const.Api.APPID_KEY)
                             .map { response ->
-                                WeatherDescription(response.main.temp.toString(),
-                                        response.name,
-                                        response.coord.lat.toInt(),
-                                        response.coord.lon.toInt())
+                                for (date in response.listOfEveryThirdTime) {
+                                    listOfWeekTownWeather.add(DataEveryThirdHourWeather(
+                                            date!!.timeUTC,
+                                            date.main.temp.toString(),
+                                            date.weather.get(0)!!.description,
+                                            date.weather.get(0)!!.icon,
+                                            response.city.name,
+                                            location.latitude.toInt(),
+                                            location.longitude.toInt()))
+                                }
+                                listOfWeekTownWeather
                             }
                             .subscribeOn(Schedulers.io())
                 }.subscribeOn(Schedulers.io())
