@@ -12,8 +12,7 @@ class TownAdapter constructor(val itemsList: MutableList<DataEveryThirdHourWeath
         val diffResult = DiffUtil.calculateDiff(DiffUtilCallback(this.itemsList, itemsList))
         this.itemsList.clear()
         this.itemsList.addAll(itemsList)
-        notifyDataSetChanged()
-        //diffResult.dispatchUpdatesTo(this)
+        diffResult.dispatchUpdatesTo(this)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TownViewHolder =
