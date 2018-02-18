@@ -10,7 +10,7 @@ import android.os.Bundle
 import com.android.forecasty.App
 import com.android.forecasty.Const
 import com.android.forecasty.R
-import com.android.forecasty.utils.CityAdapter
+import com.android.forecasty.utils.recycler.cities.CityAdapter
 import kotlinx.android.synthetic.main.activity_cities.*
 import javax.inject.Inject
 
@@ -29,13 +29,14 @@ class CitiesCycleActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cities)
 
         App.app.appComponent.inject(this)
 
         val adapter = CityAdapter(ArrayList())
-        recycler_view.adapter = adapter
+        recycler_view_cities.adapter = adapter
 
         citiesCycleViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(CitiesCycleViewModel::class.java)

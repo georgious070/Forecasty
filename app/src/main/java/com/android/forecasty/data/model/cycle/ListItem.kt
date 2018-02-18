@@ -8,7 +8,7 @@ import com.android.forecasty.data.model.town.Sys
 import com.android.forecasty.data.model.town.Wind
 import com.google.gson.annotations.SerializedName
 
-data class ListItem(@SerializedName("dt") val dt: Int,
+data class ListItem(@SerializedName("timeUTC") val dt: Int,
                     @SerializedName("rain") val rain: Any,
                     @SerializedName("coord") val coord: Coord,
                     @SerializedName("snow") val snow: Any,
