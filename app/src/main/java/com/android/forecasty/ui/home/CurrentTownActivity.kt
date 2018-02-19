@@ -29,11 +29,11 @@ class CurrentTownActivity : AppCompatActivity() {
     @Inject lateinit var locationRequest: LocationRequest
     @Inject lateinit var rxLocation: RxLocation
 
-    lateinit var townViewModel: CurrentTownViewModel
-    lateinit var rxPermissions: RxPermissions
-    lateinit var adapter: TownAdapter
-    var latitude: Int = 0
-    var longitude: Int = 0
+    private lateinit var townViewModel: CurrentTownViewModel
+    private lateinit var rxPermissions: RxPermissions
+    private lateinit var adapter: TownAdapter
+    private var latitude: Int = 0
+    private var longitude: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         App.app.appComponent.inject(this)
@@ -66,10 +66,10 @@ class CurrentTownActivity : AppCompatActivity() {
     fun observeLiveData() {
         townViewModel.getData()
                 .observe(this, Observer { response ->
-                    adapter.updateList(response!!)
-                    collapsing_toolbar.title = response.get(0).cityName
-                    latitude = response.get(0).latitude
-                    longitude = response.get(0).longitude
+                    adapter.updateList(response!!.drop(1).toMutableList())
+                    collapsing_toolbar.title = response.component1().cityName
+                    latitude = response.component1().latitude
+                    longitude = response.component1().longitude
                 })
         setButtonNextListener()
     }

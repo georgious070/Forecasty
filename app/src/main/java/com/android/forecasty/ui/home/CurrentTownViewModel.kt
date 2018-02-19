@@ -14,7 +14,7 @@ class CurrentTownViewModel @Inject constructor(
         val currentTownInteractor: CurrentTownInteractor) : ViewModel() {
 
     private var currentDayWeather: MutableLiveData<MutableList<DayData>>? = null
-    var compositeDisposable = CompositeDisposable()
+    private var compositeDisposable = CompositeDisposable()
 
     fun getData(): LiveData<MutableList<DayData>> {
         if (currentDayWeather == null) {
