@@ -27,9 +27,12 @@ class CurrentTownViewModel @Inject constructor(
         compositeDisposable.add(currentTownInteractor.getName()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ response ->
+
                     currentDayWeather!!.value = response
                 }))
     }
+
+
 
     override fun onCleared() {
         super.onCleared()

@@ -25,7 +25,7 @@ class CurrentTownRepository @Inject constructor(val currentTownApi: CurrentTownA
     }
 
     @SuppressLint("MissingPermission")
-    fun getWeatherByCoord(): Flowable<MutableList<DataEveryThirdHourWeather>> {
+    fun getWeatherByCoord(): Flowable<MutableList<DayData>> {
         var listOfWeekTownWeather: MutableList<DataEveryThirdHourWeather> = ArrayList()
         return rxLocation.location().updates(locationRequest)
                 .toFlowable(BackpressureStrategy.BUFFER)
@@ -35,11 +35,24 @@ class CurrentTownRepository @Inject constructor(val currentTownApi: CurrentTownA
                             location.longitude.toInt(),
                             Const.Api.APPID_KEY)
                             .map { response ->
-                                val hashMap = mutableMapOf<String, MutableList<DataEveryThirdHourWeather>>()
+                                val listOfDays = mutableListOf<DayData>()
+                                var counter = 0
+                                var firstDate = response.listOfEveryThirdTime[0]
+                                listOfDays.add(DayData(
+                                        convertUTCtoDate(firstDate!!.timeUTC),
+                                        mutableListOf(
+                                                DataEveryThirdHourWeather(
+                                                        firstDate.timeUTC,
+                                                        firstDate.main.temp,
+                                                        firstDate.weather[0]!!.description,
+                                                        firstDate.weather[0]!!.icon,
+                                                        response.city.name,
+                                                        location.latitude.toInt(),
+                                                        location.longitude.toInt()))))
+
                                 for (date in response.listOfEveryThirdTime) {
-                                    if (hashMap.containsKey(convertUTCtoDate(date!!.timeUTC))) {
-                                        hashMap.get(
-                                                convertUTCtoDate(date.timeUTC))!!.add(
+                                    if (listOfDays[counter].day == convertUTCtoDate(date!!.timeUTC)) {
+                                        listOfDays[counter].listOfEveryThirdHourWeather.add(
                                                 DataEveryThirdHourWeather(
                                                         date.timeUTC,
                                                         date.main.temp,
@@ -49,22 +62,22 @@ class CurrentTownRepository @Inject constructor(val currentTownApi: CurrentTownA
                                                         location.latitude.toInt(),
                                                         location.longitude.toInt()))
                                     } else {
-                                        hashMap.put(
+                                        counter++
+                                        listOfDays.add(DayData(
                                                 convertUTCtoDate(date.timeUTC),
-                                                mutableListOf(DataEveryThirdHourWeather(
-                                                        date.timeUTC,
-                                                        date.main.temp,
-                                                        date.weather[0]!!.description,
-                                                        date.weather[0]!!.icon,
-                                                        response.city.name,
-                                                        location.latitude.toInt(),
-                                                        location.longitude.toInt()
-                                                )))
+                                                mutableListOf(
+                                                        DataEveryThirdHourWeather(
+                                                                date.timeUTC,
+                                                                date.main.temp,
+                                                                date.weather[0]!!.description,
+                                                                date.weather[0]!!.icon,
+                                                                response.city.name,
+                                                                location.latitude.toInt(),
+                                                                location.longitude.toInt()))))
                                     }
                                 }
-                                listOfWeekTownWeather
-                            }
-                            .subscribeOn(Schedulers.io())
+                                listOfDays
+                            }.subscribeOn(Schedulers.io())
                 }.subscribeOn(Schedulers.io())
     }
 
@@ -73,4 +86,5 @@ class CurrentTownRepository @Inject constructor(val currentTownApi: CurrentTownA
         dateFormat.timeZone = TimeZone.getDefault()
         return dateFormat.format(epochDate)
     }
+
 }
