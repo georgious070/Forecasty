@@ -2,6 +2,9 @@ package com.android.forecasty.data.repository.town
 
 import android.annotation.SuppressLint
 import com.android.forecasty.Const
+import com.android.forecasty.addDayData
+import com.android.forecasty.addNewDay
+import com.android.forecasty.convertUTCtoDate
 import com.android.forecasty.data.api.CurrentTownApi
 import com.google.android.gms.location.LocationRequest
 import com.patloew.rxlocation.RxLocation

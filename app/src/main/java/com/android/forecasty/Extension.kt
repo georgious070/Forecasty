@@ -1,7 +1,9 @@
-package com.android.forecasty.data.repository.town
+package com.android.forecasty
 
 import android.annotation.SuppressLint
 import com.android.forecasty.data.model.town.ListItem
+import com.android.forecasty.data.repository.town.DataEveryThirdHourWeather
+import com.android.forecasty.data.repository.town.DayData
 import java.text.SimpleDateFormat
 import java.util.*
 
