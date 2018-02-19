@@ -1,5 +1,6 @@
 package com.android.forecasty.data.repository.town
 
+import android.annotation.SuppressLint
 import com.android.forecasty.Const
 import com.android.forecasty.data.api.CurrentTownApi
 import com.google.android.gms.location.LocationRequest
@@ -23,6 +24,7 @@ class CurrentTownRepository @Inject constructor(val currentTownApi: CurrentTownA
         dateFormat = SimpleDateFormat("yyyy MM dd")
     }
 
+    @SuppressLint("MissingPermission")
     fun getWeatherByCoord(): Flowable<MutableList<DataEveryThirdHourWeather>> {
         var listOfWeekTownWeather: MutableList<DataEveryThirdHourWeather> = ArrayList()
         return rxLocation.location().updates(locationRequest)
@@ -33,18 +35,19 @@ class CurrentTownRepository @Inject constructor(val currentTownApi: CurrentTownA
                             location.longitude.toInt(),
                             Const.Api.APPID_KEY)
                             .map { response ->
-                                val hashMap: MutableMap<String, MutableList<DataEveryThirdHourWeather>> = mutableMapOf()
+                                val hashMap = mutableMapOf<String, MutableList<DataEveryThirdHourWeather>>()
                                 for (date in response.listOfEveryThirdTime) {
                                     if (hashMap.containsKey(convertUTCtoDate(date!!.timeUTC))) {
                                         hashMap.get(
-                                                convertUTCtoDate(date.timeUTC))!!.add(DataEveryThirdHourWeather(
-                                                date.timeUTC,
-                                                date.main.temp,
-                                                date.weather[0]!!.description,
-                                                date.weather[0]!!.icon,
-                                                response.city.name,
-                                                location.latitude.toInt(),
-                                                location.longitude.toInt()))
+                                                convertUTCtoDate(date.timeUTC))!!.add(
+                                                DataEveryThirdHourWeather(
+                                                        date.timeUTC,
+                                                        date.main.temp,
+                                                        date.weather[0]!!.description,
+                                                        date.weather[0]!!.icon,
+                                                        response.city.name,
+                                                        location.latitude.toInt(),
+                                                        location.longitude.toInt()))
                                     } else {
                                         hashMap.put(
                                                 convertUTCtoDate(date.timeUTC),
