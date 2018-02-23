@@ -1,7 +1,6 @@
 package com.android.forecasty.domain
 
 import com.android.forecasty.data.repository.town.CurrentTownRepository
-import com.android.forecasty.data.repository.town.DataEveryThirdHourWeather
 import com.android.forecasty.data.repository.town.DayData
 import io.reactivex.Flowable
 import javax.inject.Inject

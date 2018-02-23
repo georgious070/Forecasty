@@ -4,7 +4,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.android.forecasty.R
-import com.android.forecasty.data.repository.town.DataEveryThirdHourWeather
 import com.android.forecasty.data.repository.town.DayData
 import kotlinx.android.synthetic.main.recycler_date_item.view.*
 
