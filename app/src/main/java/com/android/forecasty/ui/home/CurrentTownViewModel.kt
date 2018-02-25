@@ -5,7 +5,6 @@ import android.arch.lifecycle.ViewModel
 import com.android.forecasty.domain.CurrentTownInteractor
 import javax.inject.Inject
 import android.arch.lifecycle.MutableLiveData
-import com.android.forecasty.data.repository.town.DataEveryThirdHourWeather
 import com.android.forecasty.data.repository.town.DayData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable

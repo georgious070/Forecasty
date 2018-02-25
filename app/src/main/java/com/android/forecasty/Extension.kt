@@ -23,7 +23,6 @@ fun MutableList<DayData>.addNewDay(date: ListItem,
                                    cityName: String,
                                    latitude: Double,
                                    longitude: Double) {
-
     this.add(DayData(
             convertUTCtoDate(date.timeUTC),
             cityName,

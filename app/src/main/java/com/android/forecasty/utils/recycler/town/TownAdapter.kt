@@ -3,7 +3,6 @@ package com.android.forecasty.utils.recycler.town
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
-import com.android.forecasty.data.repository.town.DataEveryThirdHourWeather
 import com.android.forecasty.data.repository.town.DayData
 import com.android.forecasty.utils.recycler.DiffUtilCallback
 
