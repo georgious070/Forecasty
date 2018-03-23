@@ -87,7 +87,7 @@ class CurrentTownActivity : BaseActivity() {
 
     fun setButtonNextListener() {
         button_next.setOnClickListener { _ ->
-            townViewModel.toNextActivity()
+            townViewModel.toNextActivity(latitude, longitude)
         }
     }
 

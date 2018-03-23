@@ -7,6 +7,7 @@ import javax.inject.Inject
 import android.arch.lifecycle.MutableLiveData
 import com.android.forecasty.data.repository.town.DataEveryThirdHourWeather
 import com.android.forecasty.data.repository.town.DayData
+import com.android.forecasty.ui.cities.LocationParamsData
 import com.android.forecasty.ui.navigation.Screens
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -27,8 +28,8 @@ class CurrentTownViewModel @Inject constructor(
         return currentDayWeather as MutableLiveData<MutableList<DayData>>
     }
 
-    fun toNextActivity() {
-        router.navigateTo(Screens.CITIES_CYCLE)
+    fun toNextActivity(latitude: Int, longitude: Int) {
+        router.navigateTo(Screens.CITIES_CYCLE, LocationParamsData(latitude, longitude))
     }
 
     fun loadTemperature() {
