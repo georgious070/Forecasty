@@ -6,28 +6,31 @@ import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.android.forecasty.App
 import com.android.forecasty.R
-import com.android.forecasty.ui.cities.CitiesCycleActivity
 import com.tbruyelle.rxpermissions2.RxPermissions
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_town.*
 import javax.inject.Inject
 import android.location.LocationManager
 import android.provider.Settings
 import android.widget.Toast
 import androidx.net.toUri
 import com.android.forecasty.Const
+import com.android.forecasty.ui.base.BaseActivity
+import com.android.forecasty.ui.base.BaseNavigator
 import com.android.forecasty.utils.recycler.town.TownAdapter
 import com.google.android.gms.location.LocationRequest
 import com.patloew.rxlocation.RxLocation
 
-class CurrentTownActivity : AppCompatActivity() {
+class CurrentTownActivity : BaseActivity() {
 
-    @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
-    @Inject lateinit var locationRequest: LocationRequest
-    @Inject lateinit var rxLocation: RxLocation
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    @Inject
+    lateinit var locationRequest: LocationRequest
+    @Inject
+    lateinit var rxLocation: RxLocation
 
     private lateinit var townViewModel: CurrentTownViewModel
     private lateinit var rxPermissions: RxPermissions
@@ -39,7 +42,7 @@ class CurrentTownActivity : AppCompatActivity() {
         App.app.appComponent.inject(this)
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_town)
 
         adapter = TownAdapter(ArrayList())
         recycler_view_dates.isNestedScrollingEnabled = false
@@ -63,6 +66,14 @@ class CurrentTownActivity : AppCompatActivity() {
                 }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        when (requestCode) {
+            Const.Location.ACCESS_LOCATION_CODE -> observeLiveData()
+        }
+    }
+
+    override val navigator: BaseNavigator = CurrentTownNavigator(this, R.layout.activity_town)
+
     fun observeLiveData() {
         townViewModel.getData()
                 .observe(this, Observer { response ->
@@ -76,8 +87,7 @@ class CurrentTownActivity : AppCompatActivity() {
 
     fun setButtonNextListener() {
         button_next.setOnClickListener { _ ->
-            startActivity(CitiesCycleActivity.getIntent(
-                    this, latitude, longitude))
+            townViewModel.toNextActivity(latitude, longitude)
         }
     }
 
@@ -101,11 +111,5 @@ class CurrentTownActivity : AppCompatActivity() {
                         Toast.makeText(this, "Sorry", Toast.LENGTH_SHORT).show()
                     }
                 }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        when (requestCode) {
-            Const.Location.ACCESS_LOCATION_CODE -> observeLiveData()
-        }
     }
 }
