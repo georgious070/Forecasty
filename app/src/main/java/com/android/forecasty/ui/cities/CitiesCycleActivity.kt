@@ -5,27 +5,28 @@ import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.android.forecasty.App
 import com.android.forecasty.Const
 import com.android.forecasty.R
+import com.android.forecasty.ui.base.BaseActivity
+import com.android.forecasty.ui.base.BaseNavigator
 import com.android.forecasty.utils.recycler.cities.CityAdapter
 import kotlinx.android.synthetic.main.activity_cities.*
 import javax.inject.Inject
 
-class CitiesCycleActivity : AppCompatActivity() {
+class CitiesCycleActivity : BaseActivity() {
 
-    @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var citiesCycleViewModel: CitiesCycleViewModel
 
     companion object {
-        fun getIntent(context: Context, latitude: Int, longitute: Int): Intent {
-            val intent = Intent(context, CitiesCycleActivity::class.java)
-            intent.putExtra(Const.IntentKeys.INTENT_KEY_LATITUDE, latitude)
-            intent.putExtra(Const.IntentKeys.INTENT_KEY_LONGITUDE, longitute)
-            return intent
-        }
+        fun getIntent(context: Context, locationParamsData: LocationParamsData) =
+                Intent(context, CitiesCycleActivity::class.java).apply {
+                    putExtra(Const.IntentKeys.INTENT_KEY_LATITUDE, locationParamsData.latitude)
+                    putExtra(Const.IntentKeys.INTENT_KEY_LONGITUDE, locationParamsData.longitude)
+                }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,4 +49,6 @@ class CitiesCycleActivity : AppCompatActivity() {
                     adapter.updateList(response!!)
                 })
     }
+
+    override val navigator: BaseNavigator = BaseNavigator(this, R.layout.activity_cities)
 }

@@ -4,6 +4,7 @@ object Const {
 
     object Location {
         const val ACCESS_LOCATION_CODE = 10
+        const val LOCATION_UPDATES_INTERVAL = 1_800_000L
     }
 
     object Api {

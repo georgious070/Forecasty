@@ -16,7 +16,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
-@Module(includes = arrayOf(ViewModelModule::class))
+@Module(includes = [NavigationModule::class, ViewModelModule::class])
 class AppModule constructor(val app: App) {
 
     @Provides
@@ -47,7 +47,7 @@ class AppModule constructor(val app: App) {
     fun provideLocationRequest(): LocationRequest =
             LocationRequest.create()
                     .setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY)
-                    .setInterval(1_800_000)
+                    .setInterval(Const.Location.LOCATION_UPDATES_INTERVAL)
 
     @Provides
     @Singleton
