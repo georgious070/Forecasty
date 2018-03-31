@@ -15,7 +15,8 @@ import ru.terrakok.cicerone.Router
 
 class CurrentTownViewModel @Inject constructor(
         val currentTownInteractor: CurrentTownInteractor,
-        val router: Router) : ViewModel() {
+        val router: Router
+) : ViewModel() {
 
     private var currentDayWeather: MutableLiveData<MutableList<DayData>>? = null
     private var compositeDisposable = CompositeDisposable()
@@ -35,9 +36,9 @@ class CurrentTownViewModel @Inject constructor(
     fun loadTemperature() {
         compositeDisposable.add(currentTownInteractor.getName()
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ response ->
+                .subscribe { response ->
                     currentDayWeather!!.value = response
-                }))
+                })
     }
 
     override fun onCleared() {

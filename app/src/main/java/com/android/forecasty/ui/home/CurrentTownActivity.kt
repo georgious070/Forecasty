@@ -39,7 +39,6 @@ class CurrentTownActivity : BaseActivity() {
     private var longitude: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        App.app.appComponent.inject(this)
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_town)

@@ -24,7 +24,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    buildToolsVersion '26.0.2'
+    buildToolsVersion '27.0.3'
 }
 
 dependencies {
@@ -79,6 +79,8 @@ dependencies {
 
     // Dagger2
     kapt 'com.google.dagger:dagger-compiler:2.14.1'
+    kapt 'com.google.dagger:dagger-android-processor:2.14.1'
+    compile 'com.google.dagger:dagger-android-support:2.14.1'
     compile 'com.google.dagger:dagger:2.14.1'
 
     // Glide
