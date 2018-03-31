@@ -1,17 +1,11 @@
 package com.android.forecasty
 
-import android.app.Application
-import com.android.forecasty.di.component.AppComponent
 import com.android.forecasty.di.component.DaggerAppComponent
-import com.android.forecasty.di.module.AppModule
 import com.squareup.leakcanary.LeakCanary
+import dagger.android.AndroidInjector
+import dagger.android.DaggerApplication
 
-class App : Application() {
-
-    companion object {
-        lateinit var app: App
-            private set
-    }
+class App : DaggerApplication() {
 
     override fun onCreate() {
         super.onCreate()
@@ -19,13 +13,8 @@ class App : Application() {
             return
         }
         LeakCanary.install(this)
-        app = this
-        appComponent.inject(this)
     }
 
-    val appComponent: AppComponent by lazy {
-        DaggerAppComponent.builder()
-                .appModule(AppModule(this))
-                .build()
-    }
+    override fun applicationInjector(): AndroidInjector<App> =
+            DaggerAppComponent.builder().create(this)
 }

@@ -2,21 +2,23 @@ package com.android.forecasty.di.component
 
 import com.android.forecasty.App
 import com.android.forecasty.di.module.*
-import com.android.forecasty.ui.cities.CitiesCycleActivity
-import com.android.forecasty.ui.home.CurrentTownActivity
 import dagger.Component
+import dagger.android.AndroidInjectionModule
+import dagger.android.AndroidInjector
 import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [
-    AppModule::class,
-    InjectionModule::class,
+    AndroidInjectionModule::class,
+    ActivityInjectionModule::class,
     ApiModule::class,
     DatabaseModule::class,
     LocationModule::class,
     NavigationModule::class,
     ViewModelModule::class]
 )
-interface AppComponent {
+interface AppComponent : AndroidInjector<App> {
 
+    @Component.Builder
+    abstract class Builder : AndroidInjector.Builder<App>()
 }

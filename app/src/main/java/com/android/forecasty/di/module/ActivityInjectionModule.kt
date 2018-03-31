@@ -6,7 +6,7 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
-abstract class InjectionModule {
+abstract class ActivityInjectionModule {
 
     @ContributesAndroidInjector
     abstract fun bindTownActivity(): CurrentTownActivity
