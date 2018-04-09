@@ -34,8 +34,6 @@ class CitiesCycleActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cities)
 
-        App.app.appComponent.inject(this)
-
         val adapter = CityAdapter(ArrayList())
         recycler_view_cities.adapter = adapter
 
